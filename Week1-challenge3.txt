@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string timeConversion(string s) {
+    string result;
+    
+    // Extract parts of the time
+    string hour = s.substr(0, 2);
+    string minutes = s.substr(3, 2);
+    string seconds = s.substr(6, 2);
+    string period = s.substr(8, 2); // AM or PM
+
+    int hr = stoi(hour);
+
+    if (period == "AM") {
+        if (hr == 12) {
+            hour = "00";
+        }
+    } else if (period == "PM") {
+        if (hr != 12) {
+            hr += 12;
+            hour = to_string(hr);
+        }
+    }
+
+    // Build final string
+    result = hour + ":" + minutes + ":" + seconds;
+
+    return result;
+}
+
+int main() {
+    string timeInput;
+    cin >> timeInput;
+
+    string converted = timeConversion(timeInput);
+    cout << converted << endl;
+
+    return 0;
+}
